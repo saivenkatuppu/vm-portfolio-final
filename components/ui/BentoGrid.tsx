@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
+import Image from "next/image";
+import dynamic from "next/dynamic";
 
 // Also install this npm i --save-dev @types/react-lottie
-import Lottie from "react-lottie";
-import Image from "next/image";
+const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
 
 import { cn } from "@/lib/utils";
 
@@ -57,11 +58,6 @@ export const BentoGridItem = ({
   const rightLists = ["VueJS", "NuxtJS", "GraphQL"];
 
   const [copied, setCopied] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const defaultOptions = {
     loop: copied,
@@ -190,7 +186,7 @@ export const BentoGridItem = ({
                   }`}
               >
                 {/* <img src="/confetti.gif" alt="confetti" /> */}
-                {mounted && <Lottie options={defaultOptions} height={200} width={400} />}
+                <Lottie options={defaultOptions} height={200} width={400} />
               </div>
 
               <MagicButton
